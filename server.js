@@ -5,32 +5,6 @@ var path = require('path');
 const http = require('http');
 const url = require('url');
 
-const mydb = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '171002',
-    database: 'webdevelopment'
-})
-mydb.connect(function (err) {
-    if (err) {
-        console.log(err);
-    }
-    else {
-        console.log('Database connected');
-    }
-})
-
-//access to user table in database
-app.get('/users/', function (request, response) {
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/html');
-    mydb.query('SELECT * FROM user', (error, result) => {
-        if(error) throw error;
-
-        response.send(result);
-    })
-})
-
 
 var fs = require("fs"); //enables fs( File System) module
 
