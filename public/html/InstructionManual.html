@@ -1,0 +1,181 @@
+<style>
+    body {
+        color: black;
+        background-color: white;
+    }
+
+    #account {
+        position: absolute;
+        right: 5px;
+    }
+
+    .footer {
+        background-color: whitesmoke;
+        margin: auto;
+        text-align: left;
+        padding: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: large;
+        font-style: bold;
+    }
+
+    #vid_instruction {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    p {
+        padding: 30px;
+        background-color: cornsilk;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hướng dẫn sử dụng</title>
+
+    <!--Boostrap scripts-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- jQuery scripts can be inserted into head instead of body-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--css scripts-->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!--taskbar-->
+    <section>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <form class="col-sm">
+                <a href="html/InstructionManual.html" class="btn btn-light"> Instruction Manual </a>
+                <a href="html/EffectivenessPage.html" class="btn btn-light"> Effectiveness </a>
+                <a href="html/SpaService.html" class="btn btn-light"> Spa Service </a>
+                <a href="html/Feedbacks.html" class="btn btn-light"> Customer Feedbacks </a>
+                <a href="html/Contact.html" class="btn btn-light"> Contact </a>
+            </form>
+
+            <!--Login section-->
+            <form class="col-sm" id="account">
+                <button type="button" class="btn btn-light" href="../MainPage.html">Main</button>
+
+                <!--Button triggers Login Modal-->
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#login_Modal">
+                    Login
+                </button>
+
+                <!--Login Modal Form-->
+                <div class="modal fade bd-example-modal-lg" id="login_Modal" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <label for="username">Username</label>
+                                        <input type="text" placeholder="Username" name="user" style="margin: 3px"> <br>
+
+                                        <label for="password">Password</label>
+                                        <input type="password" placeholder="Password" name="pass" style="margin: 3px">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Button triggers Register Modal-->
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#register_Modal">
+                    Register
+                </button>
+
+                <!--Register Modal Form-->
+                <div class="modal fade bd-example-modal-lg" id="register_Modal" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create New Account</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <label for="username_register">Username</label>
+                                        <input type="text" placeholder="Username" name="user_register"
+                                            style="margin: 3px"> <br>
+
+                                        <label for="password_register">Password</label>
+                                        <input type="password" placeholder="Password" name="pass_register"
+                                            style="margin: 3px">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="createButton">Create</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </nav>
+    </section>
+
+    <div id="vid_instruction">
+        <video width="800px" height="500px" controls="controls">
+
+            <source src="Vệ sinh giày vải trắng bằng Matteo.mp4" type="video/mp4">
+        </video>
+
+        <p>
+            LƯU Ý: bước đắp giấy là cực kì quan trọng vì nó giúp hút hết những vết bẩn còn sót lại ra khỏi giày yêu của
+            bạn - càng đắp giấy kĩ, giày càng sạch và thơm !
+        </p>
+    </div>
+
+    <hr>
+
+    <p>
+        - Dung dịch tẩy ố đế: vệ sinh sạch sẽ đế trước rồi mới được sử dụng chai tẩy ố đế. <br>
+        - Nano: mỗi đôi giày được xịt tối đa 5 lớp nano và hiệu quả trong vòng 8h. <br>
+        - Khử mùi: cần phải vệ sinh sạch sẽ trước khi dùng khử mùi để không bị chồng mùi.
+    </p>
+
+    <div class="footer">
+        <div class="row">
+            <div class="col">
+                &copy Thiện Nhân
+            </div>
+
+            <div class="col">
+                <b>Contact</b>
+                <a class="nav-link" href="https://www.facebook.com/vo.nhan.90410/">Facebook</a>
+                <a class="nav-link" href="https://www.instagram.com/_thienhan/">Instagram</a>
+                <a>Phone: +84 703857805 / +358 413113283</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>

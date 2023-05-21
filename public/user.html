@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+</html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATTEO</title>
+
+    <!--Boostrap scripts-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- jQuery scripts can be inserted into head instead of body-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--css scripts-->
+    <link rel="stylesheet" href="styles.css">
+
+    <!--Javascript-->
+    <script>
+        //The place to handle request from user and transfer it to the backend site (server.js and controller.js)
+        //Receive response from backend site and make it visible to user
+        function getUserData(callback) {
+            var idUser = $("#user").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/users/" + idUser,
+                dataType: "text",
+                success: function (res) {
+                    var data = JSON.parse(res);
+                    console.log(data);
+                    callback(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            })
+        }
+
+        function postUserData(callback) {
+            //var idUser = $("#user_register").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/users/",
+                dataType: "text",
+                data: {
+                    idUser: $("#user_register").val(),
+                    password: $("#pass_register").val()
+                },
+                success: function (res) {
+                    var data = JSON.parse(res);
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            })
+        }
+
+        function LogIn() {
+            $('#loginButton').click(function () {
+                getUserData(function (user) {
+                    if (user.idUser == $("#user").val() && (user.password == $("#pass").val())) {
+                        alert("Login Success");
+
+                        window.location.replace("/user.html?username=" + user.idUser);
+                    }
+                    else {
+                        alert("Wrong user or password");
+                    }
+                });
+            })
+        }
+
+        function registerAccount() {
+            $('#registerButton').click(function () {
+                getUserData(function (users) {
+                    var userExists = false;
+                    users.forEach(function (user) {
+                        if (user.idUser == $("#user_register").val() && user.password == $("#pass_register").val()) {
+                            userExists = true;
+                        }
+                    });
+
+                    if (userExists) {
+                        alert("User already exists");
+                    } else {
+                        postUserData(function (user) {
+                            var data = JSON.parse(user);
+                            alert("Registration successful");
+                        });
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            var username = new URLSearchParams(window.location.search).get("username");
+            var registerButt = document.getElementById("registerButton");
+            registerButt.innerHTML = username;
+            
+            LogIn();
+        })
+    </script>
+</head>
+
+<body>
+    <!--taskbar-->
+    <section>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <form class="col-sm">
+                <a href="/public/InstructionManual.html" class="btn btn-light" style="color:blueviolet"> Instruction
+                    Manual </a>
+                <a href="/public/EffectivenessPage.html" class="btn btn-light" style="color:blueviolet"> Effectiveness
+                </a>
+                <a href="/public/SpaService.html" class="btn btn-light" style="color:blueviolet"> Spa Service </a>
+                <a href="/public/CustomerFeedbacks.html" class="btn btn-light" style="color:blueviolet"> Customer
+                    Feedbacks </a>
+                <a href="/public/Contact.html" class="btn btn-light" style="color:blueviolet"> Contact </a>
+            </form>
+
+            <!--Login section-->
+            <form class="col-sm" id="account">
+                <button type="button" class="btn btn-light" href="/public/MainPage.html"
+                    style="color:blueviolet">Main</button>
+
+                <!--Button triggers Login Modal-->
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#login_Modal"
+                    style="color:blueviolet">
+                    Login
+                </button>
+
+                <!--Login Modal Form-->
+                <div class="modal fade bd-example-modal-lg" id="login_Modal" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="username">Username</label>
+                                <input type="text" placeholder="Username" id="user"> <br>
+
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="Password" id="pass">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Button triggers Register Modal-->
+                <button type="button" class="btn btn-light" id="registerButton" data-bs-toggle="modal" data-bs-target="#register_Modal"
+                    style="color:blueviolet">
+                    Register
+                </button>
+
+                <!--Register Modal Form-->
+                <div class="modal fade bd-example-modal-lg" id="register_Modal" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create New Account</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="username_register">Username</label>
+                                <input type="text" placeholder="Username" name="user_register">
+                                <br>
+
+                                <label for="password_register">Password</label>
+                                <input type="password" placeholder="Password" name="pass_register">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="createButton">Create</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </nav>
+    </section>
+
+    <div class="container-fluid-fill">
+        <div class="row">
+            <div class="col-sm-5">
+                Wellcome to Thiện Nhân Store! Currently, we are providing two services: sneakers cleaning kit and spa
+                service. <br><br>
+
+                Regard to our product, Matteo is a Vietnamese brand sneaker cleaning
+                kit firstly appeared in 2015. It has been widely used by not only sneakersheads but also sneakers spas
+                throughout 3 main regions in Viet Nam <br><br>
+
+                This sneakers cleaning kit can be used for almost common sneakers on the market nowadays, including
+                casual and luxurious brands such as Air Force 1, NMD, Domba, Alexander Mc Queen, Yeezy, Timberland,
+                etc... <br><br><br>
+
+
+                <table width="60%">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td>Cleaning kit</td>
+                        <td>75k</td>
+                    </tr>
+
+                    <tr>
+                        <td>Insole Removal</td>
+                        <td>75k</td>
+                    </tr>
+
+                    <tr>
+                        <td>Nano Protector</td>
+                        <td>100k</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sneakers Perfume</td>
+                        <td>60k</td>
+                    </tr>
+
+                    <tr>
+                        <td>Specialised Brush</td>
+                        <td>35k</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-sm">
+                <div class="row">
+                    <div class="column">
+                        <img src="Products.png" style="object-fit:fill;
+                                width: 50%;
+                                height:80%;
+                                border: solid 1px #CCC" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="row">
+            <div class="col">
+                &copy Thiện Nhân
+            </div>
+
+            <div class="col">
+                <b>Contact</b>
+                <a class="nav-link" href="https://www.facebook.com/vo.nhan.90410/">Facebook</a>
+                <a class="nav-link" href="https://www.instagram.com/_thienhan/">Instagram</a>
+                <a>Phone: +84 703857805 / +358 413113283</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

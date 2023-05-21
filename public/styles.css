@@ -1,0 +1,50 @@
+body {
+    color:black;
+    background-color: white;
+}
+
+table,th,td{
+    border: 1px solid black;
+    font-style: normal;
+}
+
+#account{
+    position: absolute;
+    right: 5px;
+}
+
+
+/*.btn{
+    font-size: larger;
+    font-style: bold;
+    color:blueviolet;
+    display: inline-block;
+    padding-bottom: 2px;
+    background-image: linear-gradient(black,black);
+    background-position: 0 100%;
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3, background-position 0s 5s;
+}
+.btn:hover{
+    background-position: 100% 100%;
+    background-size: 100% 2px;
+}*/
+
+.container-fluid-fill{
+    height: 75vh;
+    padding: 10px;
+}
+
+.footer{
+    background-color: whitesmoke;
+    margin-top: 25px;
+    text-align: left;
+    padding: 20px;
+    width: 100%;
+}
+
+.h1{
+    text-align: center;
+    color: blueviolet;
+}
